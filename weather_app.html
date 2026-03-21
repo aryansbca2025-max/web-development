@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            width: 350px;
+            text-align: center;
+            color: white;
+        }
+
+        input {
+            padding: 12px;
+            width: 70%;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .weather {
+            background: white;
+            color: black;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🌤 Weather App</h2>
+
+    <input type="text" id="cityInput" placeholder="Enter city" value="Kolkata">
+    <button onclick="getWeather()">🔍</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+
+const data = {
+    "Delhi": {temp: 25, desc: "Clear Sky", humidity: 60},
+    "Mumbai": {temp: 30, desc: "Cloudy", humidity: 75},
+    "Bangalore": {temp: 22, desc: "Rain", humidity: 70},
+    "Kolkata": {temp: 32, desc: "Humid", humidity: 80}
+};
+
+function getWeather() {
+    const city = document.getElementById("cityInput").value;
+    const result = document.getElementById("result");
+
+    if (data[city]) {
+        result.innerHTML = `
+            <div class="weather">
+                <h3>${city}</h3>
+                <p>🌡 Temp: ${data[city].temp}°C</p>
+                <p>☁ ${data[city].desc}</p>
+                <p>💧 Humidity: ${data[city].humidity}%</p>
+            </div>
+        `;
+    } else {
+        result.innerHTML = `<div class="error">City not found!</div>`;
+    }
+}
+
+// Auto load Kolkata
+window.onload = getWeather;
+
+</script>
+
+</body>
+</html>
